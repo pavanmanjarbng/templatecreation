@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Webinar Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>HRTrainOnline Template Create</h2>
+        <form action="/generate-email" method="post" id="generate_email">
+            <div class="form-group">
+                <label for="url">Webinar URL:</label>
+                <input type="text" class="form-control" id="url" name="url">
+            </div>
+            <div class="form-group">
+                <label for="date">Webinar Date Short (Like Jan29):</label>
+                <input type="text" class="form-control" id="date" name="date">
+            </div>
+            <div class="form-group">
+                <label for="speaker">Speaker Name (Only FirstName LastName):</label>
+                <input type="text" class="form-control" id="speaker" name="speaker">
+            </div>
+            <input type="submit" class="btn btn-primary" value="Generate Email">
+            <input type="button" class="btn btn-success" value="Reload Page" onClick="window.location.reload(true)">
+        </form>
+    </div>
+</body>
+
+</html>
