@@ -1,11 +1,15 @@
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 import os
-
+from datetime import datetime
 def scrape_webinar_details(webinar_URL, webinar_date, webinar_speaker):
     url = urlopen(webinar_URL).read()
     soup = BeautifulSoup(url, features='html.parser')
+    currentDay = datetime.now().day
+    currentMonth = datetime.now().strftime('%h')
 
+    creation_date = str(currentMonth) + str(currentDay)
+    creation_date = creation_date.upper()
     # Scraping logic (as per your provided code)
     webinar_title = soup.find_all('h1')[0].get_text()
     # ... (other scraping logic)
@@ -14,7 +18,7 @@ def scrape_webinar_details(webinar_URL, webinar_date, webinar_speaker):
     webinar_speaker_shortname = webinar_speaker_fname+"_"+webinar_speaker_lname
     webinar_speaker_shortname = webinar_speaker_shortname.upper()
 
-    webinar_URL_final = webinar_URL+"?channel=mailer&camp=webinar&AdGroup="+webinar_speaker_shortname+"_"+webinar_date+"_JAN02_SF"
+    webinar_URL_final = webinar_URL+"?channel=mailer&camp=webinar&AdGroup="+webinar_speaker_shortname+"_"+webinar_date+"_"+creation_date+"_SF"
 
     web_date = soup.find_all('div', attrs={'class': 'webinatr-date'})[0].find_all('div', attrs={'class': 'date-items'})[0].find_all('div')[0].get_text()
     webinar_duration = soup.find_all('div', attrs={'class': 'webinatr-date'})[0].find_all('div', attrs={'class': 'date-items'})[2].find_all('div')[0].get_text()
@@ -149,7 +153,7 @@ def scrape_webinar_details(webinar_URL, webinar_date, webinar_speaker):
         os.makedirs(folder_path)
 
     # Define the file name
-    file_name = "webinar_mailer_" + webinar_date + "_" + webinar_speaker_shortname + "_Jan02.html"
+    file_name = "webinar_mailer_" + webinar_date + "_" + webinar_speaker_shortname +"_"+creation_date+".html"
 
     # Combine the folder path and file name to get the complete file path
     edited_file = os.path.join(folder_path, file_name)

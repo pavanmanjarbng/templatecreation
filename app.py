@@ -8,6 +8,10 @@ app = Flask(__name__)
 app.secret_key = '_g\xa9\x15\xb0T\x88\xba\xc5\x10\xda!\x7f\x83\x94\x8e'  # Replace with your generated key
 
 @app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/form')
 def index():
     return render_template('form.html')
 
